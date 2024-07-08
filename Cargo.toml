@@ -1,0 +1,9 @@
+[package]
+name = "burn_book_tutorial"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+argh = "0.1.12"
+burn = { version = "0.13", features = ["train", "vision", "ndarray"] }
+png = "0.17.13"
