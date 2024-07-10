@@ -6,4 +6,5 @@ edition = "2021"
 [dependencies]
 argh = "0.1.12"
 burn = { version = "0.13", features = ["train", "vision", "ndarray"] }
+dirs = "5.0.1"
 png = "0.17.13"

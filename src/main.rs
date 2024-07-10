@@ -41,36 +41,38 @@ fn main() {
     let device = NdArrayDevice::default();
     let artifact_dir = "./mnist_model_example";
 
-    if args.do_train {
-        crate::training::train::<MyAutodiffBackend>(
-            artifact_dir,
-            TrainingConfig::new(ModelConfig::new(10, 512), AdamConfig::new()),
-            device.clone(),
-        );
-    } else {
-        crate::inference::infer::<MyBackend>(
-            artifact_dir,
-            device,
-            burn::data::dataset::vision::MnistDataset::test()
-                .get(42)
-                .unwrap(),
-        );
-    }
+    crate::training::train::<MyAutodiffBackend>(
+        artifact_dir,
+        TrainingConfig::new(ModelConfig::new(10, 512), AdamConfig::new()),
+        device.clone(),
+    );
+    // if args.do_train {
+    // } else {
+    //     for i in 0..100 {
+    //         crate::inference::infer::<MyBackend>(
+    //             artifact_dir,
+    //             device,
+    //             burn::data::dataset::vision::MnistDataset::test()
+    //                 .get(i)
+    //                 .unwrap(),
+    //         );
+    //     }
+    // }
 
-    let decoder = png::Decoder::new(File::open("/images/04.png").unwrap());
-    let mut reader = decoder.read_info().unwrap();
-    let mut buf = vec![0; reader.output_buffer_size()];
-    let info = reader.next_frame(&mut buf).unwrap();
+    // let decoder = png::Decoder::new(File::open("/images/04.png").unwrap());
+    // let mut reader = decoder.read_info().unwrap();
+    // let mut buf = vec![0; reader.output_buffer_size()];
+    // let info = reader.next_frame(&mut buf).unwrap();
 
-    if args.do_stuff {
-        // crate::inference::infer::<MyBackend>(&artifact_dir,
-        // device,
-        for i in 0..1 {
-            let data = burn::data::dataset::vision::MnistDataset::test()
-                .get(i)
-                .unwrap();
+    // if args.do_stuff {
+    //     // crate::inference::infer::<MyBackend>(&artifact_dir,
+    //     // device,
+    //     for i in 0..1 {
+    //         let data = burn::data::dataset::vision::MnistDataset::test()
+    //             .get(i)
+    //             .unwrap();
 
-            println!("{:?}", data)
-        }
-    }
+    //         println!("{:?}", data)
+    //     }
+    // }
 }
